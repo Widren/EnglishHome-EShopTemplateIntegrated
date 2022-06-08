@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.Product"
+             x:Class="eShopOnContainers.Core.Views.PageProductList">
+    <ContentPage.BindingContext>
+        <vm:PageProductViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+
+        <ListView x:Name="MyListView"
+            ItemsSource="{Binding Products}"
+            HasUnevenRows="True"
+             ItemSelected="MyListView_ItemSelected_1">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vme:Urun">
+                    <ViewCell>
+                        <Grid Padding="7">
+                            <Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding image}" WidthRequest="200"/>
+                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label VerticalOptions="Center"
+                                       FontSize="Medium"
+                                       Text="{Binding urun}" TextColor="MidnightBlue" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                   Style="{DynamicResource ListItemTextStyle}" />
+                                        <Label 
+                                       FontSize="Medium"
+                                        
+                                       Text="{Binding fiyat}" FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center"
+                   Style="{DynamicResource ListItemTextStyle}"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <Label FontAttributes="Bold" Text="Renk:"  Style="{DynamicResource ListItemTextStyle}"></Label>
+                                            <Label FontAttributes="Bold" Text="{Binding renk}"
+                                                   Style="{DynamicResource ListItemTextStyle}"></Label>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                            <Image Source="star.png" WidthRequest="15" HeightRequest="15"></Image>
+                                            <Label Text="{Binding rating}"
+                                                   Style="{DynamicResource ListItemTextStyle}"></Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+
+    </ContentPage.Content>
+</ContentPage>

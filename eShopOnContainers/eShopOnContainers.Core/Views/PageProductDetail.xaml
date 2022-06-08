@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.Product"
+             x:Class="eShopOnContainers.Core.Views.PageProductDetail">
+    <ContentPage.BindingContext>
+        <vm:PageProductViewModel></vm:PageProductViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackLayout x:DataType="vme:Urun" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <ContentView Padding="0,0,0,40" VerticalOptions="FillAndExpand">
+                    <Image Margin="10" Source="{Binding image}" VerticalOptions="FillAndExpand" HeightRequest="250" x:Name="urunImage"/>
+                </ContentView>
+            </StackLayout>
+            <ScrollView Grid.Row="1">
+                <StackLayout x:DataType="vme:Urun" Orientation="Vertical" Padding="30,0,30,24" Spacing="10">
+                    <Label FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center" Text="{Binding urun}" FontSize="Title" x:Name="urunAd"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="MidnightBlue" FontSize="20" Text="Fiyat: "></Label>
+                        <Label Text="{Binding fiyat}" FontSize="20" Padding="0,0,0,0" TextColor="MidnightBlue" x:Name="urunFiyat"/>
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label TextColor="MidnightBlue" FontSize="20" Text="Renk: "></Label>
+                        <Label TextColor="MidnightBlue" FontSize="20" FontAttributes="Bold" Text="{Binding renk}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="star.png" WidthRequest="15" HeightRequest="15"></Image>
+                        <Label TextColor="MidnightBlue" FontSize="20" Text="Değerlendirme: "></Label>
+                        <Label TextColor="MidnightBlue" FontSize="20" FontAttributes="Bold" Text="{Binding rating}"></Label>
+                    </StackLayout>
+
+                    <Button Text="Sepete Ekle" FontSize="20"  TextColor="White" BackgroundColor="DodgerBlue" Padding="10,10,10,10" Clicked="Button_Clicked"/>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
