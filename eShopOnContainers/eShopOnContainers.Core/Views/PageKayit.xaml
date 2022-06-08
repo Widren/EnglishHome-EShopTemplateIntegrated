@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels"
+             x:Class="eShopOnContainers.Core.Views.PageKayit"
+             Title="ÜYE OL"
+             BackgroundColor="AliceBlue"
+             IconImageSource="arrow.png"
+              Shell.NavBarIsVisible="False" 
+    Visual="Material">
+
+    <ContentPage.BindingContext>
+        <vm:PageLoginViewModel></vm:PageLoginViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content  >
+        <StackLayout>
+            <Frame HeightRequest="25" WidthRequest="372" HorizontalOptions="Center" BackgroundColor="DodgerBlue">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton x:Name="Geri" Clicked="Geri_Clicked"   BackgroundColor="Transparent" Source="previous.png">
+                    </ImageButton>
+                    <Label TextColor="AliceBlue" FontAttributes="Bold" FontSize="20" Text="Geri"></Label>
+
+                </StackLayout>
+
+
+            </Frame>
+
+
+            <StackLayout Margin="30" BackgroundColor="AliceBlue" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand">
+
+                <Label Text="HOŞGELDİNİZ" TextColor="DodgerBlue" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="Bold" ></Label>
+                <Label Text="İç mekanlarınıza taze bir yaşam enerjisi getiren English Home ürünlerini almak için üyeliğinizi oluşturun, alışverişe başlayın!"
+                FontSize="Subtitle" HorizontalTextAlignment="Center"  >
+                </Label>
+                <Entry x:Name="ad" Placeholder="*Ad" Text="{Binding Ad}" FontSize="20" WidthRequest="40" TextColor="DodgerBlue" ></Entry>
+                <Entry x:Name="soyad" Placeholder="*Soyad" Text="{Binding Soyad}" FontSize="20" WidthRequest="40" TextColor="DodgerBlue"></Entry>
+                <Entry x:Name="email" Placeholder="*Email Adresiniz" Text="{Binding Username}" FontSize="20" WidthRequest="40" Keyboard="Email" TextColor="DodgerBlue"></Entry>
+                <Entry x:Name="sifre" Placeholder="*Şifreniz" Text="{Binding Password}" IsPassword="True" FontSize="20" WidthRequest="40" TextColor="DarkSlateBlue"></Entry>
+                <Entry x:Name="telNo" Placeholder="*Cep telefonu" Text="{Binding TelNo}" Keyboard="Telephone" FontSize="20" WidthRequest="40" TextColor="DodgerBlue" ></Entry>
+                <Button x:Name="UyeOl" Command="{Binding RegisterCommand}"   Text="ÜYE OL" Margin="20" BackgroundColor="DodgerBlue" FontSize="30" TextColor="AliceBlue"></Button>
+                <Label FontSize="Subtitle" HorizontalOptions="Center" Text=" Zorunlu(*) alanlar boş geçilemez"></Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

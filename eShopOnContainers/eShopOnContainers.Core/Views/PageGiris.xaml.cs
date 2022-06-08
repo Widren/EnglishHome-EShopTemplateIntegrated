@@ -18,7 +18,7 @@ namespace eShopOnContainers.Core.Views
         }
         async void OnClicked(object o, EventArgs args)
         {
-            //await Navigation.PushAsync(new PageKayıt());
+            await Navigation.PushAsync(new PageKayit());
         }
 
 
