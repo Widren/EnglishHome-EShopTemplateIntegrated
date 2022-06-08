@@ -13,6 +13,7 @@
     <PackageReference Include="IdentityModel" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="PCLCrypto" Version="2.0.147" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
@@ -38,5 +39,16 @@
     <EmbeddedResource Include="Fonts\SourceSansPro-Regular.ttf" />
     <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Regular-400.otf" />
     <EmbeddedResource Include="Fonts\Font_Awesome_5_Free-Solid-900.otf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\PageGiris.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageMain.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\PageSepet.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

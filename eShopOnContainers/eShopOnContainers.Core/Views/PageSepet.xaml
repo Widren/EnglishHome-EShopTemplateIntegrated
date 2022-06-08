@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.PageCart"
+             x:Class="eShopOnContainers.Core.Views.PageSepet"
+             Title="SEPET">
+    <ContentPage.BindingContext>
+        <vm:PageCartViewModel></vm:PageCartViewModel>
+    </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"  ></ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="MyListView"
+            ItemsSource="{Binding CartItems}"
+            HasUnevenRows="True">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vme:PageUserCartItem">
+                    <ViewCell>
+                        <Grid Padding="7">
+                            <Frame>
+                                <StackLayout  Orientation="Horizontal">
+
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        <Label Margin="5" VerticalOptions="Center"
+                                       FontSize="Medium"
+                                       Text="{Binding ProductName}" Style="{DynamicResource ListItemTextStyle}"
+                                                 TextColor="Black"/>
+                                        <Label VerticalOptions="Center"
+                                       FontSize="Medium"
+                                       Text="{Binding Price}" Style="{DynamicResource ListItemTextStyle}"
+                                                 TextColor="Black"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Margin="20" Orientation="Horizontal" Grid.Row="1" >
+            <Button Text="Sepeti Sil" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" Clicked="SepetSil"/>
+            <Button Text="Hemen Al" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" Clicked="HemenAl"/>
+        </StackLayout>
+    </Grid>
+</ContentPage>

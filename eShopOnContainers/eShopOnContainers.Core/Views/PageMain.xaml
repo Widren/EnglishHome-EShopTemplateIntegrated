@@ -1,12 +1,119 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="eShopOnContainers.Core.Views.PageMain">
+             x:Class="eShopOnContainers.Core.Views.PageMain"
+             Title="ENGLİSH HOME"
+             BackgroundColor="AliceBlue">
+    <ContentPage.ToolbarItems>
+
+        <ToolbarItem IconImageSource="user.png" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked_1"    >
+        </ToolbarItem>
+        <ToolbarItem IconImageSource="cart.png" Order="Primary" Priority="1" Clicked="ToolbarItem_Clicked" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <SearchBar BackgroundColor="MidnightBlue" CancelButtonColor="AliceBlue"  TextColor="AliceBlue" PlaceholderColor="AliceBlue" 
+                       Placeholder="Arama.." VerticalOptions="StartAndExpand"></SearchBar>
+            <Label Text="ENGLISH HOME" FontAttributes="Bold" TextColor="Black" FontSize="50"
+                   HorizontalOptions="Center" VerticalOptions="Center"></Label>
+
+            <ScrollView
+>
+                <StackLayout HorizontalOptions="CenterAndExpand"  BackgroundColor="AliceBlue">
+
+                    <Label HorizontalTextAlignment="Center" FontSize="18" FontAttributes="Bold" 
+                        TextColor="MidnightBlue" Text="120₺ ve Üzeri Alışverişlerinizde KARGO BEDAVA!" ></Label>
+
+                    <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
+                        <CarouselView x:Name="FırsatÜrünleriCarousel" BackgroundColor="#003176" IndicatorView="indicatorView">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <ImageButton Source="{Binding .}" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></ImageButton>
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView Margin="0,5,0,5" x:Name="indicatorView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
+                    </StackLayout>
+
+                    <Grid>
+
+                        <Label Margin="0,5,0,0" Text="KATEGORİLERE GÖRE ALIŞVERİŞ YAP" TextColor="Black" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
+
+                    </Grid>
+
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="YatakOdası" Clicked="YatakOdası_Clicked" BorderWidth="2"  BorderColor="Black" 
+                                Text="Yatak Odası" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="0" Grid.Column="0" BackgroundColor="White"></Button>
+
+                        <Button x:Name="Mutfak" Clicked="Mutfak_Clicked" BorderWidth="2"  BorderColor="Black"
+                                Text="Mutfak" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="0" Grid.Column="1" BackgroundColor="White"></Button>
+
+                        <Button x:Name="Sofra"  BorderWidth="2"  BorderColor="Black"
+                                Text="Sofra" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="1" Grid.Column="0" BackgroundColor="White"></Button>
+
+                        <Button x:Name="Banyo" Clicked="Banyo_Clicked" BorderWidth="2"  BorderColor="Black" 
+                                Text="Banyo" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="1" Grid.Column="1" BackgroundColor="White"></Button>
+
+
+                        <Button x:Name="Dekorasyon"  BorderWidth="2"  BorderColor="Black"
+                                Text="Dekorasyon" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="2" Grid.Column="0" BackgroundColor="White"></Button>
+
+                        <Button x:Name="Salon" Clicked="Salon_Clicked" BorderWidth="2"  BorderColor="Black"
+                                Text="Salon" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="2" Grid.Column="1" BackgroundColor="White"></Button>
+
+                        <Button x:Name="Giyim"  BorderWidth="2"  BorderColor="Black"
+                                Text="Giyim" TextColor="Black" FontAttributes="Bold" FontSize="15" 
+                                Grid.Row="3" Grid.Column="0" BackgroundColor="White"></Button>
+
+                    </Grid>
+
+                    <Grid>
+
+                        <Label Margin="0,5,0,0" Text="SİZİN İÇİN SEÇTİKLERİMİZ" TextColor="Black" FontSize="18" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
+
+                    </Grid>
+
+                    <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
+                        <CarouselView x:Name="SizinIcinSectiklerimizCarousel" BackgroundColor="#003176" IndicatorView="indicatorView">
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Frame CornerRadius="10" IsClippedToBounds="True" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                            <ImageButton Source="{Binding .}" BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></ImageButton>
+
+                                        </Frame>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        </CarouselView>
+                        <IndicatorView Margin="0,5,0,5" x:Name="indicatView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>
