@@ -1,6 +1,7 @@
 ﻿using eShopOnContainers.Core.Models;
 using eShopOnContainers.Core.Models.Models;
 using eShopOnContainers.Core.Models.Product;
+using eShopOnContainers.Core.Services.Products;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,6 +13,7 @@ namespace eShopOnContainers.Core.ViewModels
 {
     class PageProductViewModel
     {
+        private IProductsService _productsService;
         public ObservableCollection<Urun> Products { get; set; }
         private ObservableCollection<Urun> AllProducts { get; set; } = new ObservableCollection<Urun>() {
             new Urun { urun = "Softy Wellsoft Tv Battaniye 120x170 Cm Çikolata", fiyat = 149.99, image = "https://cdn-eh.akinon.net/products/2021/10/05/189290/a3dbd199-bf0d-4f02-9921-d552b60eca6c_size768x575_cropCenter.jpg", renk = "Çikolata", rating = 0.0, CategoryID = 1, SubCategoryID = 1 },
@@ -38,6 +40,10 @@ namespace eShopOnContainers.Core.ViewModels
         public PageProductViewModel()
         {
             Products = AllProducts;
+            _productsService = DependencyService.Get<IProductsService>();
+            _productsService.GetProductsAsync();
+
+            var test = "";
         }
         public PageProductViewModel(int categoryID, int subCategoryID)
         {

@@ -21,7 +21,7 @@ namespace eShopOnContainers.Core.Services.Settings
         private const string IdAllowGpsLocation = "allow_gps_location";
         private readonly string AccessTokenDefault = string.Empty;
         private readonly string IdTokenDefault = string.Empty;
-        private readonly bool UseMocksDefault = true;
+        private readonly bool UseMocksDefault = false;
         private readonly bool UseFakeLocationDefault = false;
         private readonly bool AllowGpsLocationDefault = false;
         private readonly double FakeLatitudeDefault = 47.604610d;

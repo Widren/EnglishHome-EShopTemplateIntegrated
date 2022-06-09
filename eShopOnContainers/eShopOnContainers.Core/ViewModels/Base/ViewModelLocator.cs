@@ -7,6 +7,7 @@ using eShopOnContainers.Core.Services.Location;
 using eShopOnContainers.Core.Services.Marketing;
 using eShopOnContainers.Core.Services.OpenUrl;
 using eShopOnContainers.Core.Services.Order;
+using eShopOnContainers.Core.Services.Products;
 using eShopOnContainers.Core.Services.RequestProvider;
 using eShopOnContainers.Core.Services.Settings;
 using eShopOnContainers.Core.Services.User;
@@ -66,6 +67,8 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<SettingsViewModel> ();
             Xamarin.Forms.DependencyService.Register<CampaignViewModel> ();
             Xamarin.Forms.DependencyService.Register<CampaignDetailsViewModel> ();
+
+            Xamarin.Forms.DependencyService.Register<PageProductViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)
@@ -90,6 +93,8 @@ namespace eShopOnContainers.Core.ViewModels.Base
                 Xamarin.Forms.DependencyService.RegisterSingleton<ICatalogService> (new CatalogService(requestProvider, fixUriService));
                 Xamarin.Forms.DependencyService.RegisterSingleton<IOrderService> (new OrderService(requestProvider));
                 Xamarin.Forms.DependencyService.RegisterSingleton<IUserService> (new UserService(requestProvider));
+
+                Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductService(requestProvider, fixUriService));
 
                 UseMockService = false;
             }
