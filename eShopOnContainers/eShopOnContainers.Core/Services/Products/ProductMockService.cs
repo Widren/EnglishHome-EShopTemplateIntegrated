@@ -4,7 +4,7 @@ using System.Text;
 
 namespace eShopOnContainers.Core.Services.Products
 {
-    class ProductMockService
+    public class ProductMockService
     {
     }
 }
