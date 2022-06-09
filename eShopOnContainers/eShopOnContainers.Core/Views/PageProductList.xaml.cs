@@ -11,8 +11,7 @@ using Xamarin.Forms.Xaml;
 
 namespace eShopOnContainers.Core.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PageProductList : ContentPage
+    public partial class PageProductList : ContentPageBase
     {
         public int CategoryID, SubCategoryID;
         public PageProductList(int categoryID, int subCategoryID)

@@ -2,6 +2,7 @@
 using eShopOnContainers.Core.Models.Models;
 using eShopOnContainers.Core.Models.Product;
 using eShopOnContainers.Core.Services.Products;
+using eShopOnContainers.Core.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ using Xamarin.Forms;
 
 namespace eShopOnContainers.Core.ViewModels
 {
-    class PageProductViewModel
+    class PageProductViewModel:ViewModelBase
     {
         private IProductsService _productsService;
         public ObservableCollection<Urun> Products { get; set; }
