@@ -31,7 +31,7 @@ namespace eShopOnContainers.Core.Services.Products
                 new Product { Id=115, Name = "Mace Polyester Masa Örtüsü 150x200 Cm Antrasit", Cost = 149.99, ImageURL = "https://cdn-eh.akinon.net/products/2021/11/22/200593/d5f45304-77be-4e51-8133-26639b95c3d6_size768x575_cropCenter.jpg", Color = "Mavi", rating = 0.0, CategoryID = 118},
                 new Product { Id=116, Name = "Marcel Sehpa 30x30x30 Cm Krem", Cost = 249.99, ImageURL = "https://cdn-eh.akinon.net/products/2021/04/20/177084/ba615c13-ba1c-429a-a8e8-f01cbd393f97_size768x575_cropCenter.jpg", Color = "Krem", rating = 0.0, CategoryID = 119 }
         };
-        public async Task<IEnumerable<Product>> GetProductsAsync()
+        public async Task<ObservableCollection<Product>> GetProductsAsync(int categoryID)
         {
             await Task.Delay(10);
             return MockProducts;

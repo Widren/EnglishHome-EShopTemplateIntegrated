@@ -4,6 +4,7 @@ using eShopOnContainers.Core.Models.Product;
 using eShopOnContainers.Core.Services.Products;
 using eShopOnContainers.Core.Services.Settings;
 using eShopOnContainers.Core.ViewModels.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,8 +21,16 @@ namespace eShopOnContainers.Core.ViewModels
         private IProductsService _productsService;
         private ISettingsService _settingsService;
         private int categoryID=-1;
-        private ObservableCollection<Product> Products;
-
+        private ObservableCollection<Product> _products;
+        public ObservableCollection<Product> Products
+        {
+            get => _products;
+            set
+            {
+                _products = value;
+                RaisePropertyChanged(() => Products);
+            }
+        }
         public PageProductViewModel()
         {
             _productsService = DependencyService.Get<IProductsService>();
@@ -87,10 +96,13 @@ namespace eShopOnContainers.Core.ViewModels
         {
             if (item != null)
             {
-                await Navigation.PushAsync(new PageProductDetail
-                {
-                    BindingContext = e.SelectedItem as Urun
-                });
+
+                var serializedProduct = JsonConvert.SerializeObject(item);
+                await NavigationService.NavigateToAsync("//PageProductDetail", new Dictionary<string, string> { { "data", serializedProduct } });
+                //await Navigation.PushAsync(new PageProductDetail
+                //{
+                //    BindingContext = e.SelectedItem as Urun
+                //});
             }
         }
 
@@ -101,7 +113,7 @@ namespace eShopOnContainers.Core.ViewModels
         public Command AddToCartCommand { get; set; }
         public Command ViewCartCommand { get; set; }
 
-        public ICommand AddCommand => new Command<Product>(async (item) => await ItemClicked(item));
+        public ICommand NavigateCommand => new Command<Product>(async (item) => await ItemClicked(item));
     }
 
 }

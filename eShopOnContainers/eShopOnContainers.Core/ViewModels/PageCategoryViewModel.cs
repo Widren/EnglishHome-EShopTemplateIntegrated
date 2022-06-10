@@ -1,60 +1,58 @@
-﻿using eShopOnContainers.Core.Models.PageCategory;
+﻿using eShopOnContainers.Core.Extensions;
+using eShopOnContainers.Core.Models.PageCategory;
+using eShopOnContainers.Core.Models.Product;
+using eShopOnContainers.Core.Services.PageCategory;
+using eShopOnContainers.Core.Services.Settings;
+using eShopOnContainers.Core.ViewModels.Base;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace eShopOnContainers.Core.ViewModels
 {
-    class PageCategoryViewModel
+    class PageCategoryViewModel:ViewModelBase
     {
-        public ObservableCollection<Category> Category { get; set; }
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
+        public ObservableCollection<Category> AllCategories { get; set; } = new ObservableCollection<Category>();
         public List<Category> Cat { get; set; }
-        public PageCategoryViewModel()
+        private IPageCategoryService _service;
+        private ISettingsService _settingsService;
+        public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-
-            Category = new ObservableCollection<Category>();
-            Cat = new List<Category>();
-
-            Category.Add(new Category { CategoryIcon = "bed.png", CategoryTitle = "Yatak Odası" });
-            Category.Add(new Category { CategoryIcon = "kitchen.png", CategoryTitle = "Mutfak" });
-            Category.Add(new Category { CategoryIcon = "bathroom.png", CategoryTitle = "Banyo" });
-            Category.Add(new Category { CategoryIcon = "sofa.png", CategoryTitle = "Salon" });
+            AllCategories = await _service.GetCategoriesAsync();
+            Categories = AllCategories.Where(x => x.ParentID == null).ToObservableCollection();
         }
 
-        public void SubCats(int Catid)
+        private async Task ItemClicked(Category item)
         {
-            Category.Clear();
-            if (Catid == 1)
+            if (item != null)
             {
-                Category.Add(new Category { CategoryTitle = "Yastık" });
-                Category.Add(new Category { CategoryTitle = "Battaniye" });
-                Category.Add(new Category { CategoryTitle = "Nevresim Seti" });
-                Category.Add(new Category { CategoryTitle = "Yorgan" });
-            }
+                Category catgo = item;
+                if (catgo.ParentID==null)
+                {
+                    SubCats(catgo.Id);
+                }
+                else
+                {
 
-            if (Catid == 2)
-            {
-                Category.Add(new Category { CategoryTitle = "Tencere" });
-                Category.Add(new Category { CategoryTitle = "Kavanoz" });
-                Category.Add(new Category { CategoryTitle = "Fincan Seti" });
-                Category.Add(new Category { CategoryTitle = "Yemek Takımı" });
+                    var serializedProduct = JsonConvert.SerializeObject(item);
+                    await NavigationService.NavigateToAsync("//PageProductList", new Dictionary<string, string> { { "data", serializedProduct } });
+                }
             }
-            if (Catid == 3)
-            {
-                Category.Add(new Category { CategoryTitle = "Banyo Seti" });
-                Category.Add(new Category { CategoryTitle = "Havlu" });
-                Category.Add(new Category { CategoryTitle = "Bornoz" });
-                Category.Add(new Category { CategoryTitle = "Sabunluk" });
-            }
-            if (Catid == 4)
-            {
-                Category.Add(new Category { CategoryTitle = "Halı" });
-                Category.Add(new Category { CategoryTitle = "Kırlent" });
-                Category.Add(new Category { CategoryTitle = "Masa Örtüsü" });
-                Category.Add(new Category { CategoryTitle = "Sehpa" });
+        }
+        public ICommand NavigateCommand => new Command<Category>(async (item) => await ItemClicked(item));
 
-            }
+        public void SubCats(int ParentCategoryID)
+        {
+            Categories.Clear();
+            Categories = AllCategories.Where(x => x.ParentID == ParentCategoryID)?.ToObservableCollection();
+            RaisePropertyChanged(() => Categories);
         }
     }
 }

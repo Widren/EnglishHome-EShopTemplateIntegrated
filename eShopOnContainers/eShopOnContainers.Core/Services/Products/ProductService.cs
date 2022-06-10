@@ -25,8 +25,6 @@ namespace eShopOnContainers.Core.Services.Products
         private readonly IFixUriService _fixUriService;
 
         private const string ApiUrlBase = "products";
-
-        public IEnumerable<Product> LocalBasketItems { get; set; }
         public ProductService(IRequestProvider requestProvider, IFixUriService fixUriService)
         {
             _requestProvider = requestProvider;

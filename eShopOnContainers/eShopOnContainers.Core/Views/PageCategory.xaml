@@ -8,7 +8,6 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ListView x:Name="MyListView"
-            ItemsSource="{Binding Cat}"
             HasUnevenRows="True"
             ItemSelected="MyListView_ItemSelected">
 
@@ -18,11 +17,11 @@
                         <Grid Padding="7">
                             <Frame>
                                 <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding CategoryIcon}" WidthRequest="70"/>
+                                    <Image Source="{Binding Icon}" WidthRequest="70"/>
                                     <StackLayout VerticalOptions="Center">
                                         <Label FontAttributes="Bold" TextColor="MidnightBlue" VerticalOptions="Center"
                                        FontSize="Medium"
-                                       Text="{Binding CategoryTitle}"
+                                       Text="{Binding Name}"
                    Style="{DynamicResource ListItemTextStyle}" />
                                     </StackLayout>
                                 </StackLayout>
