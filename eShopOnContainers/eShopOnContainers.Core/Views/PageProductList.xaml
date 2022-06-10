@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:ContentPageBase  xmlns:views="clr-namespace:eShopOnContainers.Core.Views" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.Product" xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
              x:Class="eShopOnContainers.Core.Views.PageProductList">
     <ContentPage.BindingContext>
@@ -57,4 +57,4 @@
 
 
     </ContentPage.Content>
-</ContentPage>
+</views:ContentPageBase>

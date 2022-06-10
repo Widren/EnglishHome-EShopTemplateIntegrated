@@ -1,4 +1,5 @@
-﻿using eShopOnContainers.Core.Models;
+﻿using eShopOnContainers.Core.Extensions;
+using eShopOnContainers.Core.Models;
 using eShopOnContainers.Core.Models.Models;
 using eShopOnContainers.Core.Models.Product;
 using eShopOnContainers.Core.Services.Products;
@@ -36,56 +37,15 @@ namespace eShopOnContainers.Core.ViewModels
             _productsService = DependencyService.Get<IProductsService>();
             _settingsService = DependencyService.Get<ISettingsService>();
         }
-        public PageProductViewModel(int categoryID)
-        {
-            this.categoryID = categoryID;
-            AddToCartCommand = new Command(() => AddToCart());
-            ViewCartCommand = new Command(() => ViewCart());
-        }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-           
+            categoryID = query.GetValueAsInt("CategoryID").Value;
             if (Products == null)
                 Products = new ObservableCollection<Product>();
 
             // Update Basket
             Products = await _productsService.GetProductsAsync(categoryID);
-        }
-
-        private void AddToCart()
-        {
-            var cn = DependencyService.Get<ISQlite>().GetConnection();
-            try
-            {
-                CartItem ci = new CartItem()
-                {
-                    ProductID = SelectedProduct.UrunID,
-                    ProductName = SelectedProduct.urun,
-                    Price = SelectedProduct.fiyat,
-
-
-                };
-                var item = cn.Table<CartItem>().ToList()
-                    .FirstOrDefault(c => c.ProductID == SelectedProduct.UrunID);
-                if (item == null)
-                    cn.Insert(ci);
-                else
-                {
-                    cn.Update(item);
-                }
-                cn.Commit();
-                cn.Close();
-                Application.Current.MainPage.DisplayAlert("Sepet", "Ürün Sepete Eklendi", "OK");
-            }
-            catch (Exception ex)
-            {
-                Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
-            }
-            finally
-            {
-                cn.Close();
-            }
         }
 
         private void ViewCart()
@@ -98,7 +58,7 @@ namespace eShopOnContainers.Core.ViewModels
             {
 
                 var serializedProduct = JsonConvert.SerializeObject(item);
-                await NavigationService.NavigateToAsync("//PageProductDetail", new Dictionary<string, string> { { "data", serializedProduct } });
+                await NavigationService.NavigateToAsync("//PageProductDetail", new Dictionary<string, string> { { "Product", serializedProduct } });
                 //await Navigation.PushAsync(new PageProductDetail
                 //{
                 //    BindingContext = e.SelectedItem as Urun
@@ -106,12 +66,10 @@ namespace eShopOnContainers.Core.ViewModels
             }
         }
 
-        private Urun _SelectedProduct;
         public Urun SelectedProduct;
 
 
-        public Command AddToCartCommand { get; set; }
-        public Command ViewCartCommand { get; set; }
+        public Command ViewCartCommand => new Command(() => ViewCart());
 
         public ICommand NavigateCommand => new Command<Product>(async (item) => await ItemClicked(item));
     }

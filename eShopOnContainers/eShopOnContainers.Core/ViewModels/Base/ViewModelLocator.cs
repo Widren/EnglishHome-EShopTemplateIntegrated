@@ -74,6 +74,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<CampaignDetailsViewModel> ();
 
             Xamarin.Forms.DependencyService.Register<PageProductViewModel>();
+            Xamarin.Forms.DependencyService.Register<PageProductDetailViewModel>();
             Xamarin.Forms.DependencyService.Register<PageCategoryViewModel>();
         }
 

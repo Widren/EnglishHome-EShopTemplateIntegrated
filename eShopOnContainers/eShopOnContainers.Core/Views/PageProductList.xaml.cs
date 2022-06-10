@@ -13,13 +13,9 @@ namespace eShopOnContainers.Core.Views
 {
     public partial class PageProductList : ContentPageBase
     {
-        public int CategoryID;
-        public PageProductList(int categoryID)
+        public PageProductList()
         {
             InitializeComponent();
-            CategoryID = categoryID;
-            PageProductViewModel plv = new PageProductViewModel(CategoryID);
-            MyListView.ItemsSource = plv.Products;
         }
     }
 }
