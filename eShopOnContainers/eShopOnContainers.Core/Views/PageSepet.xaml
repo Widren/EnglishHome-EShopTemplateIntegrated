@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <views:ContentPageBase  xmlns:views="clr-namespace:eShopOnContainers.Core.Views" xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.PageCart"
-             x:Class="eShopOnContainers.Core.Views.PageSepet"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.PageCart" xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+                        x:Class="eShopOnContainers.Core.Views.PageSepet"
              Title="SEPET">
     <ContentPage.BindingContext>
         <vm:PageCartViewModel></vm:PageCartViewModel>
@@ -19,9 +19,14 @@
         <ListView x:Name="MyListView"
             ItemsSource="{Binding CartItems}"
             HasUnevenRows="True">
-
+            <ListView.Behaviors>
+                <xtc:EventToCommandBehavior
+                        Command="{Binding NavigateCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="vme:PageUserCartItem">
+                <DataTemplate>
                     <ViewCell>
                         <Grid Padding="7">
                             <Frame>
@@ -46,7 +51,7 @@
         </ListView>
 
         <StackLayout Margin="20" Orientation="Horizontal" Grid.Row="1" >
-            <Button Text="Sepeti Sil" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" />
+            <Button Text="Sepeti Sil" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" Command="{Binding ClearAll}"/>
             <Button Text="Hemen Al" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19"/>
         </StackLayout>
     </Grid>

@@ -15,8 +15,7 @@ namespace eShopOnContainers.Core.Models
         public int ProductID { get; set; }
 
         public string ProductName { get; set; }
+        public string ProductImage { get; set; }
         public double Price { get; set; }
-
-
     }
 }

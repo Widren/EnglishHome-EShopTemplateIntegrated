@@ -1,15 +1,51 @@
-﻿using eShopOnContainers.Core.Models.PageCart;
+﻿using eShopOnContainers.Core.Models;
+using eShopOnContainers.Core.Models.PageCart;
+using eShopOnContainers.Core.Models.Product;
+using eShopOnContainers.Core.Services.Cart;
+using eShopOnContainers.Core.Services.PageCategory;
+using eShopOnContainers.Core.Services.Settings;
 using eShopOnContainers.Core.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace eShopOnContainers.Core.ViewModels
 {
-    class PageCartViewModel : PageBaseViewModel
+    public class PageCartViewModel : ViewModelBase
     {
-        public ObservableCollection<PageUserCartItem> CartItems { get; set; }
+        public ObservableCollection<CartItem> CartItems { get; set; } = new ObservableCollection<CartItem>();
+        private ICartService _service;
+        private ISettingsService _settingsService;
+        public PageCartViewModel()
+        {
+            _service = DependencyService.Get<ICartService>();
+            _settingsService = DependencyService.Get<ISettingsService>();
+            this.MultipleInitialization = true;
+        }
+        public override async Task InitializeAsync(IDictionary<string, string> query)
+        {
+            IsBusy = true;
+            CartItems = _service.GetCarts();
+            RaisePropertyChanged(() => CartItems);
+            Console.WriteLine("test");
+            IsBusy = false;
+        }
+        private async Task ItemClicked(CartItem item)
+        {
+            if (item != null)
+            {
+                IsBusy = true;
+                await NavigationService.NavigateToAsync("ProductDetail", new Dictionary<string, string> { { "Product", item.ProductID.ToString() } });
+                IsBusy = false;
+            }
+        }
+        public ICommand NavigateCommand => new Command<CartItem>(async (item) => await ItemClicked(item));
+
+
         //private double _TotalCost;
 
         //public double TotalCost
@@ -59,6 +95,28 @@ namespace eShopOnContainers.Core.ViewModels
         {
             //var cis = new CartItemService();
             //cis.RemoveItemsFromCart();
+        }
+
+        private Command clearAll;
+
+        public ICommand ClearAll
+        {
+            get
+            {
+                if (clearAll == null)
+                {
+                    clearAll = new Command(PerformClearAll);
+                }
+
+                return clearAll;
+            }
+        }
+
+        private void PerformClearAll()
+        {
+            _service.ClearAll();
+            CartItems = new ObservableCollection<CartItem>();
+            RaisePropertyChanged(() => CartItems);
         }
     }
 }

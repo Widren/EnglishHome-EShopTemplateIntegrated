@@ -1,4 +1,5 @@
 ﻿
+using eShopOnContainers.Core.Services.Cart;
 using eShopOnContainers.Core.Services.Dependency;
 using eShopOnContainers.Core.Services.FixUri;
 using eShopOnContainers.Core.Services.Identity;
@@ -47,6 +48,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.RegisterSingleton<IDependencyService>(new Services.Dependency.DependencyService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IFixUriService>(new FixUriService(settingsService));
             Xamarin.Forms.DependencyService.RegisterSingleton<ILocationService>(new LocationService(requestProvider));
+            Xamarin.Forms.DependencyService.RegisterSingleton<ICartService>(new CartService());
 
             Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductMockService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IPageCategoryService>(new PageCategoryMockService());
@@ -57,6 +59,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<PageProductViewModel>();
             Xamarin.Forms.DependencyService.Register<PageProductDetailViewModel>();
             Xamarin.Forms.DependencyService.Register<PageCategoryViewModel>();
+            Xamarin.Forms.DependencyService.Register<PageCartViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)
@@ -77,6 +80,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
 
                 Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductService(requestProvider, fixUriService));
                 Xamarin.Forms.DependencyService.RegisterSingleton<IPageCategoryService>(new CategoryService(requestProvider, fixUriService));
+                Xamarin.Forms.DependencyService.RegisterSingleton<ICartService>(new CartService());
 
                 UseMockService = false;
             }
