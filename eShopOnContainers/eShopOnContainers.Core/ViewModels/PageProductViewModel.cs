@@ -22,7 +22,7 @@ namespace eShopOnContainers.Core.ViewModels
         private IProductsService _productsService;
         private ISettingsService _settingsService;
         private int categoryID=-1;
-        private ObservableCollection<Product> _products;
+        private ObservableCollection<Product> _products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
         {
             get => _products;
@@ -36,16 +36,18 @@ namespace eShopOnContainers.Core.ViewModels
         {
             _productsService = DependencyService.Get<IProductsService>();
             _settingsService = DependencyService.Get<ISettingsService>();
+            this.MultipleInitialization = true;
         }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-            categoryID = query.GetValueAsInt("CategoryID").Value;
-            if (Products == null)
-                Products = new ObservableCollection<Product>();
 
-            // Update Basket
+            IsBusy = true;
+            if (query==null) categoryID = -1;
+            else categoryID = query.GetValueAsInt("CategoryID").Value;
             Products = await _productsService.GetProductsAsync(categoryID);
+            Console.WriteLine("Test");
+            IsBusy = false;
         }
 
         private void ViewCart()
@@ -56,14 +58,27 @@ namespace eShopOnContainers.Core.ViewModels
         {
             if (item != null)
             {
-
-                var serializedProduct = JsonConvert.SerializeObject(item);
-                await NavigationService.NavigateToAsync("//PageProductDetail", new Dictionary<string, string> { { "Product", serializedProduct } });
+                IsBusy = true;
+                await NavigationService.NavigateToAsync("ProductDetail", new Dictionary<string, string> { { "Product", item.Id.ToString() } });
+                IsBusy = false;
                 //await Navigation.PushAsync(new PageProductDetail
                 //{
                 //    BindingContext = e.SelectedItem as Urun
                 //});
             }
+        }
+
+        private void Handle_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //var _containter = BindingContext as PageProductViewModel;
+            //MyListView.BeginRefresh();
+            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
+            //    MyListView.ItemsSource = _containter.Products;
+            //else
+            //    MyListView.ItemsSource = _containter.Products.Where(i => i.Name.Contains(e.NewTextValue));
+
+            //MyListView.EndRefresh();
+
         }
 
         public Urun SelectedProduct;

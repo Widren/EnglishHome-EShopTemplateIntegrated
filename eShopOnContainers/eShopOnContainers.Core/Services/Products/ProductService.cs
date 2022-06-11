@@ -34,7 +34,7 @@ namespace eShopOnContainers.Core.Services.Products
         public async Task<ObservableCollection<Product>> GetProductsAsync(int CategoryID)
         {
 
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint,ApiUrlBase);
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.DefaultEndpointAPI, ApiUrlBase);
             IEnumerable<Product> items = await _requestProvider.GetAsync<IEnumerable<Product>>(uri);
             if (CategoryID > 0)
                 items = items.Where(product => product.CategoryID == CategoryID);
@@ -42,6 +42,31 @@ namespace eShopOnContainers.Core.Services.Products
                 return items?.ToObservableCollection();
             else
                 return new ObservableCollection<Product>();
+
+            //// Create HttpClient
+            //var client = new HttpClient { BaseAddress = new Uri("https://englishhome.azurewebsites.net/api/") };
+
+            //// Assign default header (Json Serialization)
+            //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue( "application/json"));
+
+            //// Make an API call and receive HttpResponseMessage
+            //var result = await((await client.GetAsync("products", HttpCompletionOption.ResponseContentRead)).Content.ReadAsStringAsync());
+            //Console.WriteLine(result);
+            //// Convert the HttpResponseMessage to string
+            ////var resultArray = await responseMessage.Content.ReadAsStringAsync();
+
+            //// Deserialize the Json string into type using JsonConvert
+            //var personList = JsonConvert.DeserializeObject<List<Product>>(result);
+            //return personList;
+        }
+
+
+        public async Task<Product> GetProductWithIDAsync(int ID)
+        {
+
+            var uri = UriHelper.CombineUri(GlobalSetting.Instance.DefaultEndpointAPI, $"{ApiUrlBase}/{ID}");
+            Product items = await _requestProvider.GetAsync<Product>(uri);
+            return items;
 
             //// Create HttpClient
             //var client = new HttpClient { BaseAddress = new Uri("https://englishhome.azurewebsites.net/api/") };

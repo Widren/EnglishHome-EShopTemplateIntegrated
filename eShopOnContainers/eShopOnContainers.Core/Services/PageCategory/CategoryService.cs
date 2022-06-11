@@ -28,8 +28,9 @@ namespace eShopOnContainers.Core.Services.PageCategory
 
         public async Task<ObservableCollection<Category>> GetCategoriesAsync()
         {
-            var uri = UriHelper.CombineUri(GlobalSetting.Instance.GatewayShoppingEndpoint, ApiUrlBase);
+            string uri = UriHelper.CombineUri(GlobalSetting.Instance.DefaultEndpointAPI, ApiUrlBase);
             IEnumerable<Category> items = await _requestProvider.GetAsync<IEnumerable<Category>>(uri);
+
             return items?.ToObservableCollection();
         }
 

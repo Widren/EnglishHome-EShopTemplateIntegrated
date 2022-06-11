@@ -29,6 +29,8 @@ namespace eShopOnContainers.Core
             Routing.RegisterRoute ("OrderDetail", typeof (OrderDetailView));
             Routing.RegisterRoute ("CampaignDetails", typeof(CampaignDetailsView));
             Routing.RegisterRoute ("Checkout", typeof (CheckoutView));
+            Routing.RegisterRoute("ProductDetail", typeof(PageProductDetail));
+            Routing.RegisterRoute("Products", typeof(PageProductList));
         }
 
 

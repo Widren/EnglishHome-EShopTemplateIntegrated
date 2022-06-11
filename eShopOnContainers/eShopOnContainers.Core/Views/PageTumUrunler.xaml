@@ -1,41 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:ContentPageBase  xmlns:views="clr-namespace:eShopOnContainers.Core.Views" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.Product"
-             xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels"
-             x:Class="eShopOnContainers.Core.Views.PageTumUrunler">
+             xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:xtc="http://xamarin.com/schemas/2020/toolkit"
+                        x:Class="eShopOnContainers.Core.Views.PageTumUrunler">
     <ContentPage.BindingContext>
         <vm:PageProductViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <SearchBar TextChanged="Handle_TextChanged"/>
+                <SearchBar/>
             </StackLayout>
             <ListView x:Name="MyListView"
             ItemsSource="{Binding Products}"
             HasUnevenRows="True"
              >
-
+                <ListView.Behaviors>
+                    <xtc:EventToCommandBehavior
+                        Command="{Binding NavigateCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="vme:Urun">
+                    <DataTemplate>
                         <ViewCell>
+                       
                             <Grid Padding="7">
                                 <Frame>
                                     <StackLayout Orientation="Horizontal">
-                                        <Image Source="{Binding image}" WidthRequest="200"/>
+                                        <Image Source="{Binding ImageURL}" WidthRequest="200"/>
                                         <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                             <Label VerticalOptions="Center"
                                        FontSize="Medium"
-                                       Text="{Binding urun}" TextColor="MidnightBlue" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                       Text="{Binding Name}" TextColor="MidnightBlue" HorizontalOptions="Center" HorizontalTextAlignment="Center"
                    Style="{DynamicResource ListItemTextStyle}" />
                                             <Label 
                                        FontSize="Medium"
                                         
-                                       Text="{Binding fiyat}" FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center"
+                                       Text="{Binding Cost}" FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center"
                    Style="{DynamicResource ListItemTextStyle}"/>
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                                 <Label FontAttributes="Bold" Text="Renk:"  Style="{DynamicResource ListItemTextStyle}"></Label>
-                                                <Label FontAttributes="Bold" Text="{Binding renk}"
+                                                <Label FontAttributes="Bold" Text="{Binding Color}"
                                                    Style="{DynamicResource ListItemTextStyle}"></Label>
                                             </StackLayout>
                                             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
@@ -54,4 +60,4 @@
             </ListView>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</views:ContentPageBase>

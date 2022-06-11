@@ -18,25 +18,25 @@
                         EventName="ItemTapped" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="vme:Urun">
+                <DataTemplate>
                     <ViewCell>
                         <Grid Padding="7">
                             <Frame>
                                 <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding image}" WidthRequest="200"/>
+                                    <Image Source="{Binding ImageURL}" WidthRequest="200"/>
                                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                         <Label VerticalOptions="Center"
                                        FontSize="Medium"
-                                       Text="{Binding urun}" TextColor="MidnightBlue" HorizontalOptions="Center" HorizontalTextAlignment="Center"
-                   Style="{DynamicResource ListItemTextStyle}" />
+                                       Text="{Binding Name}" TextColor="MidnightBlue" HorizontalOptions="Center" HorizontalTextAlignment="Center"
+                                            Style="{DynamicResource ListItemTextStyle}" />
                                         <Label 
                                        FontSize="Medium"
                                         
-                                       Text="{Binding fiyat}" FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center"
-                   Style="{DynamicResource ListItemTextStyle}"/>
+                                       Text="{Binding Cost}" FontAttributes="Bold" TextColor="MidnightBlue" HorizontalTextAlignment="Center"
+                                                        Style="{DynamicResource ListItemTextStyle}"/>
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                                             <Label FontAttributes="Bold" Text="Renk:"  Style="{DynamicResource ListItemTextStyle}"></Label>
-                                            <Label FontAttributes="Bold" Text="{Binding renk}"
+                                            <Label FontAttributes="Bold" Text="{Binding Color}"
                                                    Style="{DynamicResource ListItemTextStyle}"></Label>
                                         </StackLayout>
                                         <StackLayout Orientation="Horizontal" HorizontalOptions="Center">

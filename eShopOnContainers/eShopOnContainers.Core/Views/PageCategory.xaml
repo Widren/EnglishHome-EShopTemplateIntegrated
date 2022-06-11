@@ -3,17 +3,26 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.PageCategory"
              xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels"
+                        
+                xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="eShopOnContainers.Core.Views.PageCategory">
     <ContentPage.BindingContext>
-        <vm:PageProductViewModel/>
+        <vm:PageCategoryViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ListView x:Name="MyListView"
             HasUnevenRows="True"
-            ItemSelected="MyListView_ItemSelected">
+                  ItemsSource="{Binding Categories}">
+
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior
+                        Command="{Binding NavigateCommand}"
+                        EventArgsConverter="{StaticResource ItemTappedEventArgsConverter}"
+                        EventName="ItemTapped" />
+            </ListView.Behaviors>
 
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="vme:Category">
+                <DataTemplate>
                     <ViewCell>
                         <Grid Padding="7">
                             <Frame>

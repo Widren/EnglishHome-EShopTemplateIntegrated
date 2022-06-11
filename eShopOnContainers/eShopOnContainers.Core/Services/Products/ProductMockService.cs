@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,12 @@ namespace eShopOnContainers.Core.Services.Products
             await Task.Delay(10);
             return MockProducts;
 
+        }
+
+        public async Task<Product> GetProductWithIDAsync(int ID)
+        {
+            await Task.Delay(10);
+            return MockProducts.First(x => x.Id == ID);
         }
     }
 }

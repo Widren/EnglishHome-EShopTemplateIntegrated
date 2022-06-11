@@ -23,10 +23,21 @@ namespace eShopOnContainers.Core.ViewModels
         public List<Category> Cat { get; set; }
         private IPageCategoryService _service;
         private ISettingsService _settingsService;
+        public PageCategoryViewModel()
+        {
+            _service = DependencyService.Get<IPageCategoryService>();
+            _settingsService = DependencyService.Get<ISettingsService>();
+            this.MultipleInitialization = true;
+        }
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
+            IsBusy = true;
             AllCategories = await _service.GetCategoriesAsync();
-            Categories = AllCategories.Where(x => x.ParentID == null).ToObservableCollection();
+            Categories = AllCategories.Where(x => x.ParentID == 0).ToObservableCollection();
+            RaisePropertyChanged(() => Categories);
+            Console.WriteLine("test");
+
+            IsBusy = false;
         }
 
         private async Task ItemClicked(Category item)
@@ -34,15 +45,17 @@ namespace eShopOnContainers.Core.ViewModels
             if (item != null)
             {
                 Category catgo = item;
-                if (catgo.ParentID==null)
+                if (catgo.ParentID==0)
                 {
                     SubCats(catgo.Id);
                 }
                 else
                 {
 
-                    var serializedProduct = JsonConvert.SerializeObject(item);
-                    await NavigationService.NavigateToAsync("//PageProductList", new Dictionary<string, string> { { "data", serializedProduct } });
+                    IsBusy = true;
+                    await NavigationService.NavigateToAsync("Products", new Dictionary<string, string> { { "CategoryID", item.Id.ToString() } });
+
+                    IsBusy = false;
                 }
             }
         }

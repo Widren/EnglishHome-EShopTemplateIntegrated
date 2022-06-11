@@ -1,5 +1,7 @@
 ﻿using eShopOnContainers.Core.Extensions;
 using eShopOnContainers.Core.Models.Product;
+using eShopOnContainers.Core.Services.Products;
+using eShopOnContainers.Core.Services.Settings;
 using eShopOnContainers.Core.ViewModels.Base;
 using Newtonsoft.Json;
 using System;
@@ -13,17 +15,37 @@ namespace eShopOnContainers.Core.ViewModels
 {
     class PageProductDetailViewModel : ViewModelBase
     {
-        public Product Product;
+        private Product _product;
+        public Product Product
+        {
+            get => _product;
+            set
+            {
+                _product = value;
+                RaisePropertyChanged(() => Product);
+            }
+        }
+
+        private IProductsService _productsService;
+        private ISettingsService _settingsService;
+        public PageProductDetailViewModel()
+        {
+            _productsService = DependencyService.Get<IProductsService>();
+            _settingsService = DependencyService.Get<ISettingsService>();
+        }
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-            Product = JsonConvert.DeserializeObject<Product>(query["Product"]);
+            IsBusy = true;
+            int id = query.GetValueAsInt("Product").Value;
+            Product = await _productsService.GetProductWithIDAsync(id);
+            IsBusy = false;
         }
 
         public ICommand AddToCartCommand => new Command(async () => await AddToCart());
 
-        private Task AddToCart()
+        private async Task AddToCart()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("test");        
         }
     }
 }

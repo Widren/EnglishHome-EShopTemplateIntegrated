@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:ContentPageBase  xmlns:views="clr-namespace:eShopOnContainers.Core.Views" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels" xmlns:vme="clr-namespace:eShopOnContainers.Core.Models.PageCart"
              x:Class="eShopOnContainers.Core.Views.PageSepet"
              Title="SEPET">
@@ -10,9 +10,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"  ></ToolbarItem>
     </ContentPage.ToolbarItems>
-
-
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -49,8 +46,8 @@
         </ListView>
 
         <StackLayout Margin="20" Orientation="Horizontal" Grid.Row="1" >
-            <Button Text="Sepeti Sil" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" Clicked="SepetSil"/>
-            <Button Text="Hemen Al" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" Clicked="HemenAl"/>
+            <Button Text="Sepeti Sil" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19" />
+            <Button Text="Hemen Al" HorizontalOptions="FillAndExpand" BackgroundColor="DodgerBlue" TextColor="White" Font="Bold" FontSize="19"/>
         </StackLayout>
     </Grid>
-</ContentPage>
+</views:ContentPageBase>

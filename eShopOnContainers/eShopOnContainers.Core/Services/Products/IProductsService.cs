@@ -10,5 +10,6 @@ namespace eShopOnContainers.Core.Services.Products
     public interface IProductsService
     {
         Task<ObservableCollection<Product>> GetProductsAsync(int categoryID);
+        Task<Product> GetProductWithIDAsync(int ID);
     }
 }
