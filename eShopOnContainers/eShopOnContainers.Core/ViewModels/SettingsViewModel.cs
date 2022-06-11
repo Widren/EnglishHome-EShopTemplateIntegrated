@@ -1,5 +1,4 @@
 ﻿using eShopOnContainers.Core.Models.Location;
-using eShopOnContainers.Core.Models.User;
 using eShopOnContainers.Core.Services.Location;
 using eShopOnContainers.Core.Services.Settings;
 using eShopOnContainers.Core.ViewModels.Base;

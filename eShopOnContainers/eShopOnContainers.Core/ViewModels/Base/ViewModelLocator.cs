@@ -1,17 +1,13 @@
-﻿using eShopOnContainers.Core.Services.Basket;
-using eShopOnContainers.Core.Services.Catalog;
+﻿
 using eShopOnContainers.Core.Services.Dependency;
 using eShopOnContainers.Core.Services.FixUri;
 using eShopOnContainers.Core.Services.Identity;
 using eShopOnContainers.Core.Services.Location;
-using eShopOnContainers.Core.Services.Marketing;
 using eShopOnContainers.Core.Services.OpenUrl;
-using eShopOnContainers.Core.Services.Order;
 using eShopOnContainers.Core.Services.PageCategory;
 using eShopOnContainers.Core.Services.Products;
 using eShopOnContainers.Core.Services.RequestProvider;
 using eShopOnContainers.Core.Services.Settings;
-using eShopOnContainers.Core.Services.User;
 using eShopOnContainers.Services;
 using System;
 using System.Globalization;
@@ -51,27 +47,12 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.RegisterSingleton<IDependencyService>(new Services.Dependency.DependencyService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IFixUriService>(new FixUriService(settingsService));
             Xamarin.Forms.DependencyService.RegisterSingleton<ILocationService>(new LocationService(requestProvider));
-            Xamarin.Forms.DependencyService.RegisterSingleton<ICatalogService>(new CatalogMockService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IBasketService>(new BasketMockService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IOrderService>(new OrderMockService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<IUserService>(new UserMockService());
-            Xamarin.Forms.DependencyService.RegisterSingleton<ICampaignService>(new CampaignMockService());
 
             Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductMockService());
             Xamarin.Forms.DependencyService.RegisterSingleton<IPageCategoryService>(new PageCategoryMockService());
 
 
             // View models - by default, TinyIoC will register concrete classes as multi-instance.
-            Xamarin.Forms.DependencyService.Register<BasketViewModel> ();
-            Xamarin.Forms.DependencyService.Register<CatalogViewModel> ();
-            Xamarin.Forms.DependencyService.Register<CheckoutViewModel> ();
-            Xamarin.Forms.DependencyService.Register<LoginViewModel> ();
-            Xamarin.Forms.DependencyService.Register<MainViewModel> ();
-            Xamarin.Forms.DependencyService.Register<OrderDetailViewModel> ();
-            Xamarin.Forms.DependencyService.Register<ProfileViewModel> ();
-            Xamarin.Forms.DependencyService.Register<SettingsViewModel> ();
-            Xamarin.Forms.DependencyService.Register<CampaignViewModel> ();
-            Xamarin.Forms.DependencyService.Register<CampaignDetailsViewModel> ();
 
             Xamarin.Forms.DependencyService.Register<PageProductViewModel>();
             Xamarin.Forms.DependencyService.Register<PageProductDetailViewModel>();
@@ -83,11 +64,6 @@ namespace eShopOnContainers.Core.ViewModels.Base
             // Change injected dependencies
             if (useMockServices)
             {
-                Xamarin.Forms.DependencyService.RegisterSingleton<ICatalogService>(new CatalogMockService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<IBasketService> (new BasketMockService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<IOrderService> (new OrderMockService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService> (new UserMockService());
-                Xamarin.Forms.DependencyService.RegisterSingleton<ICampaignService> (new CampaignMockService());
 
                 Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductMockService());
                 Xamarin.Forms.DependencyService.RegisterSingleton<IPageCategoryService>(new PageCategoryMockService());
@@ -98,11 +74,6 @@ namespace eShopOnContainers.Core.ViewModels.Base
             {
                 var requestProvider = Xamarin.Forms.DependencyService.Get<IRequestProvider> ();
                 var fixUriService = Xamarin.Forms.DependencyService.Get<IFixUriService> ();
-                Xamarin.Forms.DependencyService.RegisterSingleton<IBasketService> (new BasketService(requestProvider, fixUriService));
-                Xamarin.Forms.DependencyService.RegisterSingleton<ICampaignService> (new CampaignService(requestProvider, fixUriService));
-                Xamarin.Forms.DependencyService.RegisterSingleton<ICatalogService> (new CatalogService(requestProvider, fixUriService));
-                Xamarin.Forms.DependencyService.RegisterSingleton<IOrderService> (new OrderService(requestProvider));
-                Xamarin.Forms.DependencyService.RegisterSingleton<IUserService> (new UserService(requestProvider));
 
                 Xamarin.Forms.DependencyService.RegisterSingleton<IProductsService>(new ProductService(requestProvider, fixUriService));
                 Xamarin.Forms.DependencyService.RegisterSingleton<IPageCategoryService>(new CategoryService(requestProvider, fixUriService));

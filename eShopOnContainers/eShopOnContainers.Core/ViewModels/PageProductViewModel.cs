@@ -46,7 +46,6 @@ namespace eShopOnContainers.Core.ViewModels
             if (query==null) categoryID = -1;
             else categoryID = query.GetValueAsInt("CategoryID").Value;
             Products = await _productsService.GetProductsAsync(categoryID);
-            Console.WriteLine("Test");
             IsBusy = false;
         }
 
@@ -61,10 +60,6 @@ namespace eShopOnContainers.Core.ViewModels
                 IsBusy = true;
                 await NavigationService.NavigateToAsync("ProductDetail", new Dictionary<string, string> { { "Product", item.Id.ToString() } });
                 IsBusy = false;
-                //await Navigation.PushAsync(new PageProductDetail
-                //{
-                //    BindingContext = e.SelectedItem as Urun
-                //});
             }
         }
 
@@ -80,14 +75,7 @@ namespace eShopOnContainers.Core.ViewModels
             //MyListView.EndRefresh();
 
         }
-
-        public Urun SelectedProduct;
-
-
         public Command ViewCartCommand => new Command(() => ViewCart());
-
         public ICommand NavigateCommand => new Command<Product>(async (item) => await ItemClicked(item));
     }
-
 }
-

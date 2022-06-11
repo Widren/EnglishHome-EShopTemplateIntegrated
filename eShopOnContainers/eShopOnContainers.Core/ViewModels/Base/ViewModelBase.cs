@@ -1,5 +1,4 @@
 ﻿using eShopOnContainers.Core.Services.Settings;
-using eShopOnContainers.Core.Views.Templates;
 using eShopOnContainers.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,5 +1,4 @@
 ﻿
-using eShopOnContainers.Core.Models.Catalog;
 using eShopOnContainers.Core.Models.Product;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
