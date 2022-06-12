@@ -15,16 +15,16 @@
     <FlyoutItem Title="Giriş Yap / Üye Ol" Icon="user.png">
         <ShellContent Route="PageGiris" ContentTemplate="{DataTemplate local:PageGiris}" />
     </FlyoutItem>
-    <FlyoutItem Title="Sepet" >
+    <FlyoutItem Title="Sepet" Icon="cart.png">
         <ShellContent Route="PageSepet" ContentTemplate="{DataTemplate local:PageSepet}" />
     </FlyoutItem>
-    <FlyoutItem Title="Tüm Ürünler"  >
+    <FlyoutItem Title="Tüm Ürünler" Icon="star.png" >
         <ShellContent Route="PageTumUrunler" ContentTemplate="{DataTemplate local:PageTumUrunler}" />
     </FlyoutItem>
-    <FlyoutItem Title="Kategoriler"  >
+    <FlyoutItem Title="Kategoriler"  Icon="menu.png">
         <ShellContent Route="PageCategory" ContentTemplate="{DataTemplate local:PageCategory}" />
     </FlyoutItem>
     <FlyoutItem >
-        <ShellContent ContentTemplate="{DataTemplate views:PageLogin}" Route="PageLogin" />
+        <ShellContent ContentTemplate="{DataTemplate views:PageLogin}" Route="PageLogin" Icon="user.png"/>
     </FlyoutItem>
 </Shell>

@@ -22,7 +22,7 @@ namespace eShopOnContainers.Core.ViewModels
         private IProductsService _productsService;
         private ISettingsService _settingsService;
         private int categoryID=-1;
-        private string searchQuery = "";
+        public string SearchQuery = "";
         private ObservableCollection<Product> _products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
         {
@@ -51,9 +51,9 @@ namespace eShopOnContainers.Core.ViewModels
                     categoryID = query.GetValueAsInt("CategoryID").Value;
 
                 if (query.ContainsKey("SearchQuery"))
-                    searchQuery = query["SearchQuery"];
+                    SearchQuery = query["SearchQuery"];
             }
-            Products = await _productsService.GetProductsAsync(categoryID, searchQuery);
+            Products = await _productsService.GetProductsAsync(categoryID, SearchQuery);
             IsBusy = false;
         }
 
@@ -73,8 +73,8 @@ namespace eShopOnContainers.Core.ViewModels
 
         public ICommand Search => new Command<string>(async (string query) =>
         {
-            
-            searchQuery = query;
+
+            SearchQuery = query;
             IsBusy = true;
             Products = await _productsService.GetProductsAsync(categoryID, query);
             IsBusy = false;
