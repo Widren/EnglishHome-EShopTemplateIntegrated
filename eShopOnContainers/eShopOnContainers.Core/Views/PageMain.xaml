@@ -33,7 +33,7 @@
                         TextColor="MidnightBlue" Text="120₺ ve Üzeri Alışverişlerinizde KARGO BEDAVA!" ></Label>
 
                     <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
-                        <CarouselView x:Name="FırsatÜrünleriCarousel" BackgroundColor="#003176" IndicatorView="indicatorView" ItemsSource="{Binding carouselFirst}">
+                        <CarouselView x:Name="FırsatÜrünleriCarousel" BackgroundColor="#003176" IndicatorView="FırsatÜrünleriCarouselView" ItemsSource="{Binding CarouselFirst}" >
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
@@ -44,7 +44,7 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
-                        <IndicatorView Margin="0,5,0,5" x:Name="indicatorView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
+                        <IndicatorView Margin="0,5,0,5" x:Name="FırsatÜrünleriCarouselView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
                     </StackLayout>
 
                     <Grid>
@@ -57,19 +57,17 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
 
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="YatakOdası" Clicked="YatakOdası_Clicked" BorderWidth="2"  BorderColor="Black" 
+                        <Button x:Name="YatakOdası" BorderWidth="2"  BorderColor="Black" 
                                 Text="Yatak Odası" TextColor="Black" FontAttributes="Bold" FontSize="15" AutomationId="100" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference YatakOdası}}"
                                 Grid.Row="0" Grid.Column="0" BackgroundColor="White"></Button>
 
-                        <Button x:Name="Mutfak" Clicked="Mutfak_Clicked" BorderWidth="2"  BorderColor="Black" AutomationId="101" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference Mutfak}}"
+                        <Button x:Name="Mutfak"  BorderWidth="2"  BorderColor="Black" AutomationId="101" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference Mutfak}}"
                                 Text="Mutfak" TextColor="Black" FontAttributes="Bold" FontSize="15" 
                                 Grid.Row="0" Grid.Column="1" BackgroundColor="White"></Button>
 
@@ -77,7 +75,7 @@
                                 Text="Banyo" TextColor="Black" FontAttributes="Bold" FontSize="15" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference Banyo}}"
                                 Grid.Row="1" Grid.Column="0" BackgroundColor="White"></Button>
 
-                        <Button x:Name="Salon" Clicked="Banyo_Clicked" BorderWidth="2"  BorderColor="Black"  AutomationId="103" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference Salon}}"
+                        <Button x:Name="Salon"  BorderWidth="2"  BorderColor="Black"  AutomationId="103" Command="{Binding CategoryPressed}" CommandParameter="{Binding AutomationId, Source={x:Reference Salon}}"
                                 Text="Salon" TextColor="Black" FontAttributes="Bold" FontSize="15" 
                                 Grid.Row="1" Grid.Column="1" BackgroundColor="White"></Button>
 
@@ -90,7 +88,7 @@
                     </Grid>
 
                     <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
-                        <CarouselView x:Name="SizinIcinSectiklerimizCarousel" BackgroundColor="#003176" IndicatorView="indicatorView" ItemsSource="{Binding carouselSecond}">
+                        <CarouselView x:Name="SizinIcinSectiklerimizCarousel" BackgroundColor="#003176" IndicatorView="SizinIcinSectiklerimizCarouselView" ItemsSource="{Binding CarouselSecond}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
@@ -102,7 +100,7 @@
                                 </DataTemplate>
                             </CarouselView.ItemTemplate>
                         </CarouselView>
-                        <IndicatorView Margin="0,5,0,5" x:Name="indicatView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
+                        <IndicatorView Margin="0,5,0,5" x:Name="SizinIcinSectiklerimizCarouselView" IndicatorColor="Gray" SelectedIndicatorColor="White" HorizontalOptions="Center" IndicatorSize="7"/>
                     </StackLayout>
 
                 </StackLayout>

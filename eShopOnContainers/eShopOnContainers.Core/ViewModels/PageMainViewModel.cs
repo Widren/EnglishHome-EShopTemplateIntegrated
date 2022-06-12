@@ -15,14 +15,33 @@ namespace eShopOnContainers.Core.ViewModels
     class PageMainViewModel : ViewModelBase
     {
 
-        public ObservableCollection<string> carouselFirst = new ObservableCollection<string>()
+        public ObservableCollection<string> CarouselFirst
+        {
+            get => carouselFirst;
+            set
+            {
+                carouselFirst = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<string> carouselFirst = new ObservableCollection<string>()
             {
              "https://cdn-eh.akinon.net/cms/2022/04/25/4a7f6870-fa44-42fa-b904-4e7c611e8139.jpg",
              "https://cdn-eh.akinon.net/cms/2022/04/25/6d7a94dd-66f9-472f-919c-a505a55fd8fa.jpg",
              "https://cdn-eh.akinon.net/cms/2022/04/25/5b168158-4d8a-4471-a189-1d7c868c1381.jpg",
             };
+        public ObservableCollection<string> CarouselSecond
+        {
+            get => carouselSecond;
+            set
+            {
+                carouselSecond = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ObservableCollection<string> carouselSecond = new ObservableCollection<string>()
+        private ObservableCollection<string> carouselSecond = new ObservableCollection<string>()
             {
              "https://cdn-eh.akinon.net/products/2020/10/06/75616/f27e6b9b-c5e3-40f3-8e7d-d9f1473b7e47_size300x225_cropTop.jpg",
              "https://cdn-eh.akinon.net/products/2020/10/06/75632/0ed072de-d2fb-41f2-872d-d1e745984681_size300x225_cropTop.jpg",
@@ -30,21 +49,11 @@ namespace eShopOnContainers.Core.ViewModels
             };
         public PageMainViewModel()
         {
-
             MultipleInitialization = true;
         }
 
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
-
-            IsBusy = true;
-
-            RaisePropertyChanged(() => carouselFirst);
-
-            RaisePropertyChanged(() => carouselSecond);
-
-            IsBusy = false;
-
         }
 
         private Command navigateLogin;
