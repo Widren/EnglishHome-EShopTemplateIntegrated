@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <SearchBar/>
+                <SearchBar x:Name="searchBar" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" SearchCommand="{Binding Search}"/>
             </StackLayout>
             <ListView x:Name="MyListView"
             ItemsSource="{Binding Products}"

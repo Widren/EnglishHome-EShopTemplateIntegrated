@@ -22,6 +22,7 @@ namespace eShopOnContainers.Core.ViewModels
         private IProductsService _productsService;
         private ISettingsService _settingsService;
         private int categoryID=-1;
+        private string searchQuery = "";
         private ObservableCollection<Product> _products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
         {
@@ -43,9 +44,12 @@ namespace eShopOnContainers.Core.ViewModels
         {
 
             IsBusy = true;
-            if (query==null) categoryID = -1;
-            else categoryID = query.GetValueAsInt("CategoryID").Value;
-            Products = await _productsService.GetProductsAsync(categoryID);
+            if (query == null) categoryID = -1;
+            else { 
+                categoryID = query.GetValueAsInt("CategoryID").Value;
+                bool searchQueryFound = query.TryGetValue("SearchQuery", out searchQuery);
+            }
+            Products = await _productsService.GetProductsAsync(categoryID, searchQuery);
             IsBusy = false;
         }
 
@@ -63,18 +67,16 @@ namespace eShopOnContainers.Core.ViewModels
             }
         }
 
-        private void Handle_TextChanged(object sender, TextChangedEventArgs e)
+        public ICommand Search => new Command<string>(async (string query) =>
         {
-            //var _containter = BindingContext as PageProductViewModel;
-            //MyListView.BeginRefresh();
-            //if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            //    MyListView.ItemsSource = _containter.Products;
-            //else
-            //    MyListView.ItemsSource = _containter.Products.Where(i => i.Name.Contains(e.NewTextValue));
-
-            //MyListView.EndRefresh();
-
-        }
+            if (query != null)
+            {
+                searchQuery = query;
+                IsBusy = true;
+                Products = await _productsService.GetProductsAsync(categoryID, query);
+                IsBusy = false;
+            }
+        });
         public Command ViewCartCommand => new Command(() => ViewCart());
         public ICommand NavigateCommand => new Command<Product>(async (item) => await ItemClicked(item));
     }

@@ -31,11 +31,12 @@ namespace eShopOnContainers.Core.Services.Products
             _fixUriService = fixUriService;
         }
 
-        public async Task<ObservableCollection<Product>> GetProductsAsync(int CategoryID)
+        public async Task<ObservableCollection<Product>> GetProductsAsync(int CategoryID, string searchQuery)
         {
 
             var uri = UriHelper.CombineUri(GlobalSetting.Instance.DefaultEndpointAPI, ApiUrlBase);
             IEnumerable<Product> items = await _requestProvider.GetAsync<IEnumerable<Product>>(uri);
+            items = items.Where(x => x.Name.ToLower().Contains(searchQuery.ToLower()));
             if (CategoryID > 0)
                 items = items.Where(product => product.CategoryID == CategoryID);
             if (items != null)

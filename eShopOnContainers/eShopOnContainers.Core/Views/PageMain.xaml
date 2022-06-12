@@ -19,7 +19,9 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar BackgroundColor="MidnightBlue" CancelButtonColor="AliceBlue"  TextColor="AliceBlue" PlaceholderColor="AliceBlue" 
-                       Placeholder="Arama.." VerticalOptions="StartAndExpand"></SearchBar>
+                       Placeholder="Arama.." VerticalOptions="StartAndExpand" x:Name="searchBar" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" SearchCommand="{Binding Search} "> 
+                
+            </SearchBar>
             <Label Text="ENGLISH HOME" FontAttributes="Bold" TextColor="Black" FontSize="50"
                    HorizontalOptions="Center" VerticalOptions="Center"></Label>
 
@@ -31,7 +33,7 @@
                         TextColor="MidnightBlue" Text="120₺ ve Üzeri Alışverişlerinizde KARGO BEDAVA!" ></Label>
 
                     <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
-                        <CarouselView x:Name="FırsatÜrünleriCarousel" BackgroundColor="#003176" IndicatorView="indicatorView">
+                        <CarouselView x:Name="FırsatÜrünleriCarousel" BackgroundColor="#003176" IndicatorView="indicatorView" ItemsSource="{Binding FırsatÜrünleriCarousel}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
@@ -101,7 +103,7 @@
                     </Grid>
 
                     <StackLayout BackgroundColor="#003176" HeightRequest="250" Padding="5">
-                        <CarouselView x:Name="SizinIcinSectiklerimizCarousel" BackgroundColor="#003176" IndicatorView="indicatorView">
+                        <CarouselView x:Name="SizinIcinSectiklerimizCarousel" BackgroundColor="#003176" IndicatorView="indicatorView" ItemsSource="{Binding SizinIcinSectiklerimizCarousel}">
                             <CarouselView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout>
