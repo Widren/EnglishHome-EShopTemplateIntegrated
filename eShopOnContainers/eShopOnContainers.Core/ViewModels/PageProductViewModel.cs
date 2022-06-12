@@ -45,9 +45,13 @@ namespace eShopOnContainers.Core.ViewModels
 
             IsBusy = true;
             if (query == null) categoryID = -1;
-            else { 
-                categoryID = query.GetValueAsInt("CategoryID").Value;
-                bool searchQueryFound = query.TryGetValue("SearchQuery", out searchQuery);
+            else {
+
+                if (query.ContainsKey("CategoryID"))
+                    categoryID = query.GetValueAsInt("CategoryID").Value;
+
+                if (query.ContainsKey("SearchQuery"))
+                    searchQuery = query["SearchQuery"];
             }
             Products = await _productsService.GetProductsAsync(categoryID, searchQuery);
             IsBusy = false;
@@ -69,13 +73,11 @@ namespace eShopOnContainers.Core.ViewModels
 
         public ICommand Search => new Command<string>(async (string query) =>
         {
-            if (query != null)
-            {
-                searchQuery = query;
-                IsBusy = true;
-                Products = await _productsService.GetProductsAsync(categoryID, query);
-                IsBusy = false;
-            }
+            
+            searchQuery = query;
+            IsBusy = true;
+            Products = await _productsService.GetProductsAsync(categoryID, query);
+            IsBusy = false;
         });
         public Command ViewCartCommand => new Command(() => ViewCart());
         public ICommand NavigateCommand => new Command<Product>(async (item) => await ItemClicked(item));

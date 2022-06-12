@@ -25,7 +25,7 @@ namespace eShopOnContainers.Core
         private void InitializeRouting()
         {
             Routing.RegisterRoute("ProductDetail", typeof(PageProductDetail));
-            Routing.RegisterRoute("Products", typeof(PageProductList));
+            Routing.RegisterRoute("Products", typeof(PageTumUrunler));
         }
 
 

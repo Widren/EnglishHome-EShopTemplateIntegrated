@@ -9,7 +9,15 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
-                <SearchBar x:Name="searchBar" SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" SearchCommand="{Binding Search}"/>
+                <SearchBar x:Name="searchBar"   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" SearchCommand="{Binding Search}">
+                    <SearchBar.Behaviors>
+                        <xtc:EventToCommandBehavior
+            EventName="TextChanged"
+                            CommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+            Command="{Binding Search}"
+            />
+                    </SearchBar.Behaviors>
+                </SearchBar>
             </StackLayout>
             <ListView x:Name="MyListView"
             ItemsSource="{Binding Products}"
