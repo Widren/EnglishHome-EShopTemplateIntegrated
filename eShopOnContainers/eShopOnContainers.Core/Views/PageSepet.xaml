@@ -8,7 +8,7 @@
     </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"  ></ToolbarItem>
+        <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Command="{Binding NavigateHome}"  ></ToolbarItem>
     </ContentPage.ToolbarItems>
     <Grid>
         <Grid.RowDefinitions>

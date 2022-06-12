@@ -1,13 +1,15 @@
 ﻿using eShopOnContainers.Core.ViewModels.Base;
+using eShopOnContainers.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace eShopOnContainers.Core.ViewModels
 {
-    class PageLoginViewModel : PageBaseViewModel
+    class PageLoginViewModel : ViewModelBase
     {
         private string _username;
 
@@ -96,7 +98,20 @@ namespace eShopOnContainers.Core.ViewModels
         }
 
         public Command LoginCommand { get; set; }
-        public Command RegisterCommand { get; set; }
+
+        public ICommand RegisterCommand => new Command(async () =>
+        {
+            IsBusy = true;
+            await NavigationService.NavigateToAsync("Register");
+            IsBusy = false;
+        });
+        public ICommand NavigateHome => new Command(async () =>
+        {
+            IsBusy = true;
+            await NavigationService.NavigateToAsync("Home");
+            IsBusy = false;
+        });
+
 
         //public PageLoginViewModel()
         //{

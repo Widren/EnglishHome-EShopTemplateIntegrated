@@ -10,18 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace eShopOnContainers.Core.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PageKayit : ContentPage
+    public partial class PageKayit : ContentPageBase
     {
         public PageKayit()
         {
             InitializeComponent();
-
-        }
-
-
-        private void Geri_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopAsync();
         }
     }
 }

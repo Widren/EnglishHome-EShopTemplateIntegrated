@@ -15,17 +15,15 @@ namespace eShopOnContainers.Core
             InitializeComponent ();
 
             var settingsService = ViewModelLocator.Resolve<ISettingsService> ();
-
-            if (string.IsNullOrEmpty (settingsService.AuthAccessToken))
-            {
-                this.GoToAsync ("//Login");
-            }
         }
 
         private void InitializeRouting()
         {
             Routing.RegisterRoute("ProductDetail", typeof(PageProductDetail));
             Routing.RegisterRoute("Products", typeof(PageTumUrunler));
+            Routing.RegisterRoute("Categories", typeof(PageCategory));
+            Routing.RegisterRoute("Register", typeof(PageKayit));
+            Routing.RegisterRoute("Home", typeof(PageMain));
         }
 
 

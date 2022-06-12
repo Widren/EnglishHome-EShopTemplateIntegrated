@@ -23,6 +23,7 @@ namespace eShopOnContainers.Core.ViewModels
         public List<Category> Cat { get; set; }
         private IPageCategoryService _service;
         private ISettingsService _settingsService;
+        private int CategoryID = -1;
         public PageCategoryViewModel()
         {
             _service = DependencyService.Get<IPageCategoryService>();
@@ -32,9 +33,19 @@ namespace eShopOnContainers.Core.ViewModels
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
+
             AllCategories = await _service.GetCategoriesAsync();
-            Categories = AllCategories.Where(x => x.ParentID == 0).ToObservableCollection();
-            RaisePropertyChanged(() => Categories);
+            if (query != null)
+            {
+                if (query.ContainsKey("CategoryID"))
+                    CategoryID= query.GetValueAsInt("CategoryID").Value;
+            }
+            if (CategoryID < 0)
+            {
+                Categories = AllCategories.Where(x => x.ParentID == 0).ToObservableCollection();
+                RaisePropertyChanged(() => Categories);
+            }
+            else SubCats(CategoryID);
             Console.WriteLine("test");
 
             IsBusy = false;

@@ -21,7 +21,7 @@ namespace eShopOnContainers.Core.ViewModels
     {
         private IProductsService _productsService;
         private ISettingsService _settingsService;
-        private int categoryID=-1;
+        private int CategoryID=-1;
         public string SearchQuery = "";
         private ObservableCollection<Product> _products = new ObservableCollection<Product>();
         public ObservableCollection<Product> Products
@@ -31,6 +31,16 @@ namespace eShopOnContainers.Core.ViewModels
             {
                 _products = value;
                 RaisePropertyChanged(() => Products);
+            }
+        }
+        private ObservableCollection<Product> _allproducts = new ObservableCollection<Product>();
+        public ObservableCollection<Product> AllProducts
+        {
+            get => _allproducts;
+            set
+            {
+                _allproducts = value;
+                RaisePropertyChanged(() => AllProducts);
             }
         }
         public PageProductViewModel()
@@ -44,17 +54,22 @@ namespace eShopOnContainers.Core.ViewModels
         {
 
             IsBusy = true;
-            if (query == null) categoryID = -1;
-            else {
+            if (query != null)
+            {
 
                 if (query.ContainsKey("CategoryID"))
-                    categoryID = query.GetValueAsInt("CategoryID").Value;
+                    CategoryID = query.GetValueAsInt("CategoryID").Value;
 
                 if (query.ContainsKey("SearchQuery"))
                     SearchQuery = query["SearchQuery"];
             }
-            Products = await _productsService.GetProductsAsync(categoryID, SearchQuery);
+            AllProducts = await _productsService.GetProductsAsync(-1, "");
+            Filter();
             IsBusy = false;
+        }
+        void Filter()
+        {
+            Products = AllProducts.Where(x => (CategoryID < 0 || CategoryID == x.CategoryID) && x.Name.ToLower().Contains(SearchQuery.ToLower())).ToObservableCollection();
         }
 
         private void ViewCart()
@@ -76,7 +91,7 @@ namespace eShopOnContainers.Core.ViewModels
 
             SearchQuery = query;
             IsBusy = true;
-            Products = await _productsService.GetProductsAsync(categoryID, query);
+            Filter();
             IsBusy = false;
         });
         public Command ViewCartCommand => new Command(() => ViewCart());

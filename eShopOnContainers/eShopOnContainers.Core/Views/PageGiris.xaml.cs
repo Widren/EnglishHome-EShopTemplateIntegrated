@@ -16,16 +16,6 @@ namespace eShopOnContainers.Core.Views
         {
             InitializeComponent();
         }
-        async void OnClicked(object o, EventArgs args)
-        {
-            await Navigation.PushAsync(new PageKayit());
-        }
 
-
-
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//PageMain");
-        }
     }
 }

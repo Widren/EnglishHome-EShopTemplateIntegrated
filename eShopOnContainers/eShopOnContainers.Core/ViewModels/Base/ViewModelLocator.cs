@@ -60,6 +60,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
             Xamarin.Forms.DependencyService.Register<PageProductDetailViewModel>();
             Xamarin.Forms.DependencyService.Register<PageCategoryViewModel>();
             Xamarin.Forms.DependencyService.Register<PageCartViewModel>();
+            Xamarin.Forms.DependencyService.Register<PageMainViewModel>();
         }
 
         public static void UpdateDependencies(bool useMockServices)

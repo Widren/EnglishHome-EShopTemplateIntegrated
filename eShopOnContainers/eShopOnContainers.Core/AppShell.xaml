@@ -24,7 +24,4 @@
     <FlyoutItem Title="Kategoriler"  Icon="menu.png">
         <ShellContent Route="PageCategory" ContentTemplate="{DataTemplate local:PageCategory}" />
     </FlyoutItem>
-    <FlyoutItem >
-        <ShellContent ContentTemplate="{DataTemplate views:PageLogin}" Route="PageLogin" Icon="user.png"/>
-    </FlyoutItem>
 </Shell>

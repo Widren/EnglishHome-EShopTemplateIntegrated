@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:ContentPageBase  xmlns:views="clr-namespace:eShopOnContainers.Core.Views" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:vm="clr-namespace:eShopOnContainers.Core.ViewModels"
              x:Class="eShopOnContainers.Core.Views.PageKayit"
              Title="ÜYE OL"
@@ -14,18 +14,6 @@
 
     <ContentPage.Content  >
         <StackLayout>
-            <Frame HeightRequest="25" WidthRequest="372" HorizontalOptions="Center" BackgroundColor="DodgerBlue">
-                <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="Geri" Clicked="Geri_Clicked"   BackgroundColor="Transparent" Source="previous.png">
-                    </ImageButton>
-                    <Label TextColor="AliceBlue" FontAttributes="Bold" FontSize="20" Text="Geri"></Label>
-
-                </StackLayout>
-
-
-            </Frame>
-
-
             <StackLayout Margin="30" BackgroundColor="AliceBlue" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand">
 
                 <Label Text="HOŞGELDİNİZ" TextColor="DodgerBlue" FontSize="30" HorizontalTextAlignment="Center" FontAttributes="Bold" ></Label>
@@ -42,4 +30,4 @@
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-</ContentPage>
+</views:ContentPageBase>

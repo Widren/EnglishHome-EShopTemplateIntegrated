@@ -5,7 +5,7 @@
              Title="GİRİŞ YAP / ÜYE OL"
              Visual="Material">
     <ContentPage.ToolbarItems>
-        <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Clicked="ToolbarItem_Clicked"   ></ToolbarItem>
+        <ToolbarItem  IconImageSource="home.png" Order="Primary" Priority="0" Command="{Binding NavigateHome}"   ></ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.BindingContext>
         <vm:PageLoginViewModel></vm:PageLoginViewModel>
@@ -30,7 +30,7 @@
             <StackLayout Grid.Row="1" Grid.Column="0">
                 <Label Text="HESABIM YOK" FontAttributes="Bold" TextColor="Black" FontSize="Large" HorizontalTextAlignment="Center" Margin="20"></Label>
                 <Label Text="Sipariş takibi, kolay iade ve daha fazlası için bir hesap oluşturun." FontAttributes="Bold" TextColor="Black" FontSize="Small" Margin="10" HorizontalTextAlignment="Center"></Label>
-                <Button x:Name="HesapOlustur" Clicked="OnClicked" Text="HESAP OLUŞTUR" FontSize="20" TextColor="White" FontAttributes="Bold"  HorizontalOptions="Center" BackgroundColor="DodgerBlue"></Button>
+                <Button x:Name="HesapOlustur" Command="{Binding RegisterCommand}" Text="HESAP OLUŞTUR" FontSize="20" TextColor="White" FontAttributes="Bold"  HorizontalOptions="Center" BackgroundColor="DodgerBlue"></Button>
             </StackLayout>
 
 

@@ -18,11 +18,5 @@ namespace eShopOnContainers.Core.Views
             InitializeComponent();
 
         }
-
-        private void ToolbarItem_Clicked(object sender, EventArgs e)
-        {
-            Shell.Current.GoToAsync("//PageMain");
-
-        }
     }
 }

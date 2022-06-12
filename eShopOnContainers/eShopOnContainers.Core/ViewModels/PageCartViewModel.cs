@@ -45,6 +45,12 @@ namespace eShopOnContainers.Core.ViewModels
         }
         public ICommand NavigateCommand => new Command<CartItem>(async (item) => await ItemClicked(item));
 
+        public ICommand NavigateHome => new Command(async () =>
+        {
+            IsBusy = true;
+            await NavigationService.NavigateToAsync("Home");
+            IsBusy = false;
+        });
 
         //private double _TotalCost;
 
