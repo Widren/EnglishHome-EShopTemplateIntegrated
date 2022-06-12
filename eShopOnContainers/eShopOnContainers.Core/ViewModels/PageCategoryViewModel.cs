@@ -46,8 +46,6 @@ namespace eShopOnContainers.Core.ViewModels
                 RaisePropertyChanged(() => Categories);
             }
             else SubCats(CategoryID);
-            Console.WriteLine("test");
-
             IsBusy = false;
         }
 
