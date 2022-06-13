@@ -56,47 +56,18 @@ namespace eShopOnContainers.Core.ViewModels
         {
         }
 
-        private Command navigateLogin;
-
-        public ICommand NavigateLogin
+        public ICommand NavigateLogin => new Command(async () =>
         {
-            get
-            {
-                if (navigateLogin == null)
-                {
-                    navigateLogin = new Command(PerformNavigateLogin);
-                }
-
-                return navigateLogin;
-            }
-        }
-
-        private void PerformNavigateLogin()
+            IsBusy = true;
+            await NavigationService.NavigateToAsync("//PageGiris");
+            IsBusy = false;
+        });
+        public ICommand NavigateCart => new Command(async () =>
         {
-            Shell.Current.GoToAsync("//PageGiris");
-        }
-
-        private Command navigateCart;
-
-        public ICommand NavigateCart
-        {
-            get
-            {
-                if (navigateCart == null)
-                {
-                    navigateCart = new Command(PerformNavigateCart);
-                }
-
-                return navigateCart;
-            }
-        }
-
-        private void PerformNavigateCart()
-        {
-            Shell.Current.GoToAsync("//PageSepet");
-        }
-
-
+            IsBusy = true;
+            await NavigationService.NavigateToAsync("Cart");
+            IsBusy = false;
+        });
 
 
         public ICommand Search => new Command<string>(async (string query) =>

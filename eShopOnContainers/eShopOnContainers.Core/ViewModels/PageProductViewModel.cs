@@ -1,6 +1,4 @@
 ﻿using eShopOnContainers.Core.Extensions;
-using eShopOnContainers.Core.Models;
-using eShopOnContainers.Core.Models.Models;
 using eShopOnContainers.Core.Models.Product;
 using eShopOnContainers.Core.Services.Products;
 using eShopOnContainers.Core.Services.Settings;
@@ -53,7 +51,6 @@ namespace eShopOnContainers.Core.ViewModels
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
 
-            IsBusy = true;
             if (query != null)
             {
 
@@ -65,7 +62,6 @@ namespace eShopOnContainers.Core.ViewModels
             }
             AllProducts = await _productsService.GetProductsAsync(-1, "");
             Filter();
-            IsBusy = false;
         }
         void Filter()
         {

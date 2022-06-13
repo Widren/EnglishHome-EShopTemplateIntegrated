@@ -43,7 +43,6 @@ namespace eShopOnContainers.Core.ViewModels
         public override async Task InitializeAsync(IDictionary<string, string> query)
         {
             IsBusy = true;
-
             // Categoriler Categori servisi ile çekilir.
             AllCategories = await _service.GetCategoriesAsync();
             if (query != null)
