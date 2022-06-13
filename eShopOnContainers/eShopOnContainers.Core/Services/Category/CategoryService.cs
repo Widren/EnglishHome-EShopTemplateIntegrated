@@ -23,14 +23,10 @@ namespace eShopOnContainers.Core.Services.PageCategory
             _fixUriService = fixUriService;
         }
 
-
-
-
         public async Task<ObservableCollection<Category>> GetCategoriesAsync()
         {
             string uri = UriHelper.CombineUri(GlobalSetting.Instance.DefaultEndpointAPI, ApiUrlBase);
             IEnumerable<Category> items = await _requestProvider.GetAsync<IEnumerable<Category>>(uri);
-
             return items?.ToObservableCollection();
         }
 

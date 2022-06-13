@@ -34,7 +34,7 @@ namespace eShopOnContainers.Core.ViewModels.Base
 
         public static bool UseMockService { get; set; }
 
-        static ViewModelLocator()
+        static ViewModelLocator() // Burada servisler Xamarin forms içerisine kayıt edilir Daha sonra DependencyService ile çağrılabilir.
         {
             // Services - by default, TinyIoC will register interface registrations as singletons.
             var settingsService = new SettingsService ();

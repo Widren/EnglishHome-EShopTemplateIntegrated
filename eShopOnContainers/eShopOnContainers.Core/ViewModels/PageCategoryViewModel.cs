@@ -18,14 +18,24 @@ namespace eShopOnContainers.Core.ViewModels
 {
     class PageCategoryViewModel:ViewModelBase
     {
-        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
-        public ObservableCollection<Category> AllCategories { get; set; } = new ObservableCollection<Category>();
-        public List<Category> Cat { get; set; }
+        private ObservableCollection<Category> AllCategories { get; set; } = new ObservableCollection<Category>();
+
+        private ObservableCollection<Category> _categories = new ObservableCollection<Category>();
+        public ObservableCollection<Category> Categories
+        {
+            get => _categories;
+            set
+            {
+                _categories = value;
+                RaisePropertyChanged(() => Categories);
+            }
+        }
         private IPageCategoryService _service;
         private ISettingsService _settingsService;
         private int CategoryID = -1;
         public PageCategoryViewModel()
         {
+            // Eshop mimarisinde bulunan dependency servisi viewmodel locator içerisine tanımladığımız servisleri kullanabilmemize olanak sağlar.
             _service = DependencyService.Get<IPageCategoryService>();
             _settingsService = DependencyService.Get<ISettingsService>();
             this.MultipleInitialization = true;
@@ -34,6 +44,7 @@ namespace eShopOnContainers.Core.ViewModels
         {
             IsBusy = true;
 
+            // Categoriler Categori servisi ile çekilir.
             AllCategories = await _service.GetCategoriesAsync();
             if (query != null)
             {
