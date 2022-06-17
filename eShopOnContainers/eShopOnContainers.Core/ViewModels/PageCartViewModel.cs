@@ -52,56 +52,6 @@ namespace eShopOnContainers.Core.ViewModels
             IsBusy = false;
         });
 
-        //private double _TotalCost;
-
-        //public double TotalCost
-        //{
-        //    set
-        //    {
-        //        _TotalCost = value;
-        //        OnPropertyChanged();
-        //    }
-        //    get { return _TotalCost; }
-
-        //}
-
-        //public Command PlaceOrderCommand { get; set; }
-        //public CartViewModel()
-        //{
-        //    CartItems = new ObservableCollection<UserCartItem>();
-        //    LoadItems();
-
-        //}
-
-        //private void LoadItems()
-        //{
-        //    var cn = DependencyService.Get<ISQlite>().GetConnection();
-        //    var items = cn.Table<CartItem>().ToList();
-        //    CartItems.Clear();
-        //    foreach (var item in items)
-        //    {
-        //        CartItems.Add(new UserCartItem()
-        //        {
-        //            CartItemId = item.CartItemID,
-        //            ProductId = item.ProductID,
-        //            ProductName = item.ProductName,
-        //            Price = item.Price,
-
-
-
-
-        //        });
-
-        //    }
-        //}
-
-
-
-        private void RemoveItemsFromCart()
-        {
-            //var cis = new CartItemService();
-            //cis.RemoveItemsFromCart();
-        }
 
         private Command clearAll;
 

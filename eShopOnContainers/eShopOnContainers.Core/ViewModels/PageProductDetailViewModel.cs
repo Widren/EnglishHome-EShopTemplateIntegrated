@@ -45,7 +45,8 @@ namespace eShopOnContainers.Core.ViewModels
         public ICommand AddToCartCommand => new Command(async (item) => await AddToCart());
         private async Task AddToCart()
         {
-            _cartService.AddToCart(Product);    
+            Console.WriteLine("test");
+            _cartService.AddToCart(Product);
         }
     }
 }

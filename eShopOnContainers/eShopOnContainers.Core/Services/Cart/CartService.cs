@@ -30,7 +30,8 @@ namespace eShopOnContainers.Core.Services.Cart
         {
             var carts = GetCarts();
             if (carts.Any(x => x.ProductID == product.Id)) return;
-            carts.Add(new CartItem() { CartItemID = carts[carts.Count - 1].CartItemID + 1, Price = product.Cost, ProductID = product.Id, ProductName = product.Name, ProductImage = product.ImageURL });
+            int cartID = !carts.Any() ? 0 : carts[carts.Count - 1].CartItemID + 1;
+            carts.Add(new CartItem() { CartItemID = cartID, Price = product.Cost, ProductID = product.Id, ProductName = product.Name, ProductImage = product.ImageURL });
             PostCarts(carts);
         }
         public void RemoveFromCart(int CartID)
